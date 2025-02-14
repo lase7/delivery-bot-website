@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form onsubmit="return validateLogin()">
+    <div class="imgcontainer">
+        <img src="/static/logo.png" alt="Logo" height="120" width="120">
+
+
+    </div>
+  
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" id="uname" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" id="psw" required>
+
+      <button type="submit">Login</button>
+      <label>
+        <input type="checkbox" id="rememberMe"> Remember me
+      </label>
+    </div>
+
+    <div class="container" style="background-color:#f1f1f1">
+      <button type="button" class="cancelbtn" onclick="clearForm()">Cancel</button>
+      <span class="psw">Forgot <a href="#" onclick="forgotPassword()">password?</a></span>
+    </div>
+</form>
+
+<script>
+    function validateLogin() {
+        var username = document.getElementById("uname").value;
+        var password = document.getElementById("psw").value;
+        var rememberMe = document.getElementById("rememberMe").checked;
+
+        if (username === "Lase" && password === "1234567") {
+            alert("Login successful!");
+            
+            // Save to localStorage if "Remember Me" is checked
+            if (rememberMe) {
+                localStorage.setItem("savedUsername", username);
+                localStorage.setItem("savedPassword", password);
+            } else {
+                localStorage.removeItem("savedUsername");
+                localStorage.removeItem("savedPassword");
+            }
+
+            window.location.href = "index.html"; // Redirect to next page
+            return false; // Prevent default form submission
+        } else {
+            alert("Login unsuccessful. Invalid username or password.");
+            return false; // Stop form submission
+        }
+    }
+
+    // Function to clear form fields
+    function clearForm() {
+        document.getElementById("uname").value = "";
+        document.getElementById("psw").value = "";
+    }
+
+    // Function to handle "Forgot Password"
+    function forgotPassword() {
+        alert("Please contact support to reset your password.");
+    }
+
+    // Auto-fill saved username and password if "Remember Me" was checked
+    window.onload = function() {
+        if (localStorage.getItem("savedUsername")) {
+            document.getElementById("uname").value = localStorage.getItem("savedUsername");
+            document.getElementById("psw").value = localStorage.getItem("savedPassword");
+            document.getElementById("rememberMe").checked = true;
+        }
+    };
+</script>
+
+
+  </body>
+  </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D2D Document Delivery Services</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="imgcontainer">
+    <img src="/static/logo.png" alt="Logo" height="120" width="120">
+  </div>
+
+  <section class="hero">
+    <h1>Fast and Reliable Document Delivery Services</h1>
+    <p>Delivering Your Documents Securely Across the College of Engineering</p>
+
+    <input type="text" id="location" placeholder="Enter Pickup Location">
+    <input type="text" id="destination" placeholder="Enter Destination">
+    <button onclick="sendSignal()">Submit</button>
+
+    <p id="trackingNumber" style="font-weight: bold; margin-top: 10px;"></p>
+  </section>
+
+  <script>
+    async function sendSignal() {
+      // Retrieve and sanitize user input
+      const location = document.getElementById('location').value.trim();
+      const destination = document.getElementById('destination').value.trim();
+
+      if (!location || !destination) {
+        alert("Please enter both Pickup Location and Destination!");
+        return;
+      }
+
+      // Generate a 7-digit tracking number
+      const trackingNumber = Math.floor(1000000 + Math.random() * 9000000);
+      document.getElementById('trackingNumber').innerText = "Your Tracking Number: " + trackingNumber;
+
+      try {
+        // Send data to the backend
+        const response = await fetch('http://127.0.0.1:5000/send_signal', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ location, destination, tracking_number: trackingNumber })
+        });
+
+        if (!response.ok) {
+          console.error("Server error:", response.statusText);
+          alert("Server error. Please try again later.");
+          return;
+        }
+
+        const result = await response.json();
+        alert(result.message);
+      } catch (error) {
+        console.error("Network error:", error);
+        alert("Network error. Please try again.");
+      }
+    }
+  </script>
+
+  <footer class="footer">
+    <p>&copy; 2025 D2DrD. All rights reserved.</p>
+  </footer>
+</body>
+</html>
