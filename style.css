@@ -100,7 +100,7 @@ span.psw {
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   text-align: center; /* Center text */
-  margin-top: 20px; /* Add some margin to the top */
+  margin-top: 0px; /* Add some margin to the top */
 }
 
 .track-id {
