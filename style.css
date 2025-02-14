@@ -62,7 +62,7 @@ button:hover {
 body {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center vertically */
+  justify-content: flex-start; /* Align items to the top */
   align-items: center; /* Center horizontally */
   height: 100vh; /* Full viewport height */
   margin: 0;
@@ -100,6 +100,7 @@ span.psw {
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
   text-align: center; /* Center text */
+  margin-top: 20px; /* Add some margin to the top */
 }
 
 .track-id {
