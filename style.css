@@ -52,6 +52,28 @@ button:hover {
   padding: 16px;
 }
 
+form {
+  width: 60%; /* Standard width for desktops */
+  max-width: 600px; /* Prevents it from becoming too wide */
+  min-width: 300px; /* Ensures it doesn’t become too small */
+  margin: auto; /* Centers the form */
+}
+
+@media (max-width: 768px) { 
+  form {
+      width: 90%; /* Wider on smaller screens */
+  }
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+}
+
+
 /* The "Forgot password" text */
 span.psw {
   float: right;
